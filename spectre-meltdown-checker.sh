@@ -5652,9 +5652,9 @@ check_CVE_2018_12207_bsd() {
 	if ! is_cpu_affected "$cve"; then
 		# override status & msg in case CPU is not vulnerable after all
 		pvulnstatus $cve OK "your CPU vendor reported your CPU model as not affected"
-	elif [ -z "$kernel_2m_x_ept" ]; then
+elif [ -z "$kernel_2m_x_ept" ]; then
 		pvulnstatus $cve VULN "Your kernel doesn't support mitigating this CVE, you should update it"
-	elif [ "$kernel_2m_x_ept" != 0 ]; then
+	elif [ $kernel_2m_x_ept != 0 ]; then
 		pvulnstatus $cve VULN "Your kernel supports mitigating this CVE, but the mitigation is disabled"
 		explain "To enable the mitigation, use 'sysctl vm.pmap.allow_2m_x_ept=0'"
 	else
